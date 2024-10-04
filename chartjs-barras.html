@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <title>Graficos com ChartJS</title>
+
+  <style>
+    body {
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: rgba(238, 248, 254, 0.996);
+    }
+
+    h3{
+      text-align: center;
+      color: rgb(255, 99, 133);
+      font-family: 'Courier New', Courier, monospace;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div>
+    <h3> Comparativo de Temperatura e Umidade em Setembro </h3>
+    <canvas id="graficoTempUmidBarra" width="800" height="500"></canvas>
+  </div>
+
+  <div>
+    <h3>Tendência de temperatura e umidade em Setembro</h3>
+    <canvas id="graficoTempUmidLinha" width="800" height="500"></canvas>
+  </div>
+</body>
+
+<script>
+
+  //grafico de barra
+  const ctxBarra = document.getElementById("graficoTempUmidBarra") // obter o contexto do canvas
+
+  // colocando os valores necessarios - vetores/listas q usamos para colocar valores
+  // constante n muda o valor
+  const meses = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho"];
+  const temperaturas = [22, 24, 27, 23, 20, 18];
+  const umidades = [90, 89, 93, 87, 88, 82];
+
+  const graficoTempUmidBarra = new Chart(ctxBarra, {
+    // configuracao
+    type: "bar", // tipo do grafico
+
+    data: {
+      labels: meses, // indicadores (parte de baixo, eixo x)
+
+      datasets: [
+        // datasets sao metricas
+
+        {
+          label: "Temperatura media (°C)", // o que aparece qnd vc passa o mouse por cima
+          data: temperaturas, // indicadores que ficam no y - colocamos os valores atribuidos na const
+          borderWidth: 1, // definicao da borda
+          backgroundColor: "rgba(255, 99, 132, 0.7)", // cor de preenchimento
+          borderColor: "rgba(255, 99, 132, 1)", // cor da borda
+        },
+
+        {
+          label: "Umidade media (%)", // o que aparece qnd vc passa o mouse por cima
+          data: umidades, // indicadores que ficam no y - colocamos os valores atribuidos na const
+          borderWidth: 1, // definicao da borda
+          backgroundColor: "rgba(54, 162, 235, 0.7)", // cor de preenchimento
+          borderColor: "rgba(54, 162, 235, 1)", // cor da borda
+        },
+      ],
+    },
+
+    options: {
+      responsive: true, // tornando responsivo
+      scales: {
+        y: {
+          beginAtZero: true, // se o eixo y comeca no zero
+        },
+      },
+    },
+  });
+
+  // grafico de linha
+  const ctxLinha = document.getElementById("graficoTempUmidLinha");
+
+  const horario = ["12:00", "13:00", "14:00", "15:00", "16:00", "17:00"];
+  const temperatura = [30, 29, 28, 25, 22, 23];
+  const umidade = [80, 82, 80, 85, 80, 83];
+
+  const graficoTempUmidLinha = new Chart(ctxLinha, {
+    type: "line",
+
+    data: {
+      labels: horario,
+
+      datasets: [
+
+        {
+          label: "Temperatura media (°C)",
+          data: temperatura,
+          borderWidth: 3,
+          backgroundColor: "rgba(255, 99, 132, 0.7)",
+          borderColor: "rgba(255, 99, 132, 1)",
+        },
+
+        {
+          label: "Umidade media (%)",
+          data: umidade,
+          borderWidth: 3,
+          backgroundColor: "rgba(54, 162, 235, 0.7)",
+          borderColor: "rgba(54, 162, 235, 1)",
+        },
+      ],
+    },
+
+    options: {
+      responsive: true, // tornando responsivo
+      scales: {
+        y: {
+          beginAtZero: false, // se o eixo y comeca no zero
+        },
+      },
+    },
+  });
+
+</script>
+
+</html>
